@@ -158,7 +158,9 @@ final class GitWrapper
         if (! $privateKeyPath = realpath($privateKey)) {
             throw new GitException('Path private key could not be resolved: ' . $privateKey);
         }
-
+        
+        $wrapperPath = sprintf("/bin/sh %s", $wrapperPath);
+        
         $this->setEnvVar('GIT_SSH', $wrapperPath);
         $this->setEnvVar('GIT_SSH_KEY', $privateKeyPath);
         $this->setEnvVar('GIT_SSH_PORT', $port);
